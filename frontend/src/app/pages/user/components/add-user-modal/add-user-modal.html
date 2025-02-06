@@ -1,0 +1,42 @@
+<h2 mat-dialog-title>Cadastrar usuário</h2>
+<form [formGroup]="addUserForm" (ngSubmit)="onSubmit()">
+  <mat-dialog-content class="mat-typography">
+    <mat-form-field>
+      <mat-label>Nome</mat-label>
+      <input matInput formControlName="name" />
+      @if (hasFieldError('name')) {
+      <mat-error>Nome obrigatório</mat-error>
+      }
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="email" />
+      @if (hasFieldError('email')) {
+      <mat-error>Email obrigatório</mat-error>
+      }
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Senha</mat-label>
+      <input type="password" matInput formControlName="password" />
+      @if (hasFieldError('password')) {
+      <mat-error>Senha obrigatório</mat-error>
+      }
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Select</mat-label>
+      <mat-select formControlName="type">
+        <mat-option value="DOCENTE">Docente</mat-option>
+        <mat-option value="DISCENTE">Discente</mat-option>
+      </mat-select>
+      @if (hasFieldError('type')) {
+      <mat-error>Tipo obrigatório</mat-error>
+      }
+    </mat-form-field>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cancelar</button>
+    <button mat-button type="submit" [disabled]="addUserForm.invalid">
+      Cadastrar
+    </button>
+  </mat-dialog-actions>
+</form>

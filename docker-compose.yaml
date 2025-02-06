@@ -1,0 +1,57 @@
+services:
+  frontend:
+    container_name: frontend
+    build:
+      context: ./frontend
+    ports:
+      - "80:80"
+    networks:
+      - app-network
+
+  backend:
+    container_name: backend
+    build:
+      context: ./backend
+    ports:
+      - "8080:8080"
+    depends_on:
+      - database
+    restart: always
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://database:3306/sistemaReserva?createDatabaseIfNotExist=true&useSSL=false&useTimezone=true&serverTimezone=UTC
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=root
+      - APPLICATION_AUTHORIZATION_SERVER_ALLOWED_REDIRECTS=http://localhost/authorized
+      - APPLICATION_CORS_FRONTENDS=http://localhost
+      - GLPI_URL=http://glpi/apirest.php
+      - GLPI_APP_TOKEN=
+      - GLPI_USER_TOKEN=
+    networks:
+      - app-network
+
+  glpi:
+    image: diouxx/glpi
+    container_name: glpi
+    hostname: glpi
+    ports:
+      - "4000:80"
+    volumes:
+      - ./data/glpi:/var/www/html/glpi
+    networks:
+      - app-network
+
+  database:
+    image: mariadb:latest
+    container_name: database
+    environment:
+      MARIADB_PASSWORD: root
+      MARIADB_ROOT_PASSWORD: root
+      MARIADB_DATABASE: sistemaReserva
+    volumes:
+      - ./data/mariadb:/var/lib/mysql
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge

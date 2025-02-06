@@ -1,0 +1,19 @@
+<h2 mat-dialog-title>Reportar problema</h2>
+<form [formGroup]="reportBookingForm" (ngSubmit)="onSubmit()">
+  <mat-dialog-content class="mat-typography">
+    <mat-form-field>
+      <mat-label>Motivo:</mat-label>
+      <textarea
+        matInput
+        formControlName="description"
+        placeholder="Descreva o problema com o recurso"
+      ></textarea>
+    </mat-form-field>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cancelar</button>
+    <button mat-button type="submit" [disabled]="reportBookingForm.invalid">
+      Reportar
+    </button>
+  </mat-dialog-actions>
+</form>

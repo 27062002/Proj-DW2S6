@@ -1,0 +1,28 @@
+<mat-toolbar>
+  @if (isLoggedIng) {
+  <button
+    mat-icon-button
+    class="example-icon"
+    [matMenuTriggerFor]="menu"
+    aria-label="Example icon-button with menu icon"
+  >
+    <mat-icon>menu</mat-icon>
+  </button>
+  }
+  <span>PRRS6 Frontend</span>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item routerLink="/">Dashboard</button>
+    <button mat-menu-item routerLink="/users">Gerenciar Usuários</button>
+    <button mat-menu-item routerLink="/resources">Gerenciar Recursos</button>
+  </mat-menu>
+  @if (isLoggedIng) {
+  <button mat-flat-button style="margin-left: auto" (click)="logout()">
+    Logout
+  </button>
+  } @else {
+  <button mat-flat-button style="margin-left: auto" (click)="login()">
+    Login
+  </button>
+  }
+</mat-toolbar>
+<router-outlet></router-outlet>

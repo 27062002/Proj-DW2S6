@@ -1,0 +1,63 @@
+<h2 mat-dialog-title>Editar reserva de recurso</h2>
+<form [formGroup]="editBookingForm" (ngSubmit)="onSubmit()">
+  <mat-dialog-content class="mat-typography">
+    <div class="flex">
+      <mat-form-field>
+        <mat-label>Inicio</mat-label>
+        <input matInput formControlName="startDate" mask="d0/M0/0000 Hh:m0" />
+        <mat-hint>DD/MM/YYYY HH:MM</mat-hint>
+        @if (hasFieldError('startDate')) {
+        <mat-error>Data inválida</mat-error>
+        }
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Fim</mat-label>
+        <input matInput formControlName="endDate" mask="d0/M0/0000 Hh:m0" />
+        <mat-hint>DD/MM/YYYY HH:MM</mat-hint>
+        @if (hasFieldError('endDate')) {
+        <mat-error>Data inválida</mat-error>
+        }
+      </mat-form-field>
+    </div>
+    <div class="flex">
+      <mat-form-field>
+        <mat-label>Usuário</mat-label>
+        <mat-select formControlName="user_id">
+          @for (user of users; track user.id) {
+          <mat-option value="{{user.id}}">{{user.name}}</mat-option>
+          }
+        </mat-select>
+        @if (hasFieldError('user_id')) {
+        <mat-error>Usuário obrigatório</mat-error>
+        }
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Recurso</mat-label>
+        <mat-select formControlName="resource_id">
+          @for (resource of resources; track resource.id) {
+          <mat-option value="{{resource.id}}">{{resource.name}}</mat-option>
+          }
+        </mat-select>
+        @if (hasFieldError('resource_id')) {
+        <mat-error>Recurso obrigatório</mat-error>
+        }
+      </mat-form-field>
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions class="actions">
+    <div>
+      <button type="button" mat-icon-button (click)="onDelete()">
+        <mat-icon>delete</mat-icon>
+      </button>
+      <button type="button" mat-icon-button (click)="onReport()">
+        <mat-icon>bug_report</mat-icon>
+      </button>
+    </div>
+    <div>
+      <button type="button" mat-button mat-dialog-close>Cancelar</button>
+      <button mat-button type="submit" [disabled]="editBookingForm.invalid">
+        Salvar
+      </button>
+    </div>
+  </mat-dialog-actions>
+</form>

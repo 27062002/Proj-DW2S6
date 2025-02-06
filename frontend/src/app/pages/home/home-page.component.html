@@ -1,0 +1,43 @@
+<div class="actions">
+  <div class="toggle">
+    <button
+      mat-flat-button
+      class="button"
+      mwlCalendarPreviousView
+      [view]="view"
+      [(viewDate)]="viewDate"
+    >
+      Anterior
+    </button>
+    <button
+      mat-flat-button
+      class="button"
+      mwlCalendarToday
+      [(viewDate)]="viewDate"
+    >
+      Atual
+    </button>
+    <button
+      class="button"
+      mat-flat-button
+      mwlCalendarNextView
+      [view]="view"
+      [(viewDate)]="viewDate"
+    >
+      Próxima
+    </button>
+  </div>
+  @if (isLogged) {
+  <button mat-flat-button (click)="addBooking()">Reservar recurso</button>
+  }
+</div>
+<mwl-calendar-week-view
+  [viewDate]="viewDate"
+  [events]="events"
+  [refresh]="refresh"
+  [hourSegments]="2"
+  [dayStartHour]="8"
+  [dayEndHour]="22"
+  (eventClicked)="handleEvent($event.event)"
+>
+</mwl-calendar-week-view>

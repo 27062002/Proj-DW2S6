@@ -1,0 +1,29 @@
+@use "@angular/material" as mat;
+
+.actions {
+  margin: 8px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.toggle .button {
+  &:nth-child(1) {
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+  }
+
+  &:nth-child(2) {
+    border-radius: 0;
+    background-color: var(
+      --mat-toolbar-container-background-color,
+      var(--mat-app-surface)
+    );
+    color: var(--mat-toolbar-container-text-color, var(--mat-app-on-surface));
+  }
+
+  &:nth-child(3) {
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+  }
+}

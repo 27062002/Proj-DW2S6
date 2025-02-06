@@ -1,0 +1,12 @@
+.flex {
+  gap: 8px;
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
